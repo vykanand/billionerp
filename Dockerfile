@@ -3,6 +3,7 @@ FROM php:5.6-apache
 # Enable Apache modules and PHP extensions
 RUN a2enmod expires rewrite
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
+RUN apt-get update && apt-get install -y bash
 
 # Copy optimized PHP configuration
 COPY php.ini /usr/local/etc/php/
