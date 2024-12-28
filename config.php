@@ -1,5 +1,5 @@
 <?php
-$host = "junction.proxy.rlwy.net";  // Docker service name
+$host = "mysql.railway.internal";  // Docker service name
 $username = "root";
 $password = "cyIgFzjjbzRiVbiHkemiUCKftdfPqBOn";
 $dbname = "erpz";
