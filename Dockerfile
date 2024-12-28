@@ -4,9 +4,6 @@ FROM php:5.6-apache
 RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list \
     && sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list
 
-# Update package list and install bash
-RUN apt-get update && apt-get install -y bash
-
 # Enable Apache modules and PHP extensions
 RUN a2enmod expires rewrite
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
@@ -18,6 +15,9 @@ COPY php.ini /usr/local/etc/php/
 # Copy .htaccess to the root of the web directory in the container
 COPY .htaccess /var/www/html/
 COPY . /var/www/html/
+
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html
 
 # Set PHP OPcache settings
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini \
