@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Appmarket</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="description" content="App Market for Billion">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://appsthink.com/fav.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://appsthink.com/fav.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://appsthink.com/fav.png">
+    <link rel="mask-icon" href="https://appsthink.com/fav.png" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script>
+    var hasWebP = !1;
+    ! function() {
+        var A = new Image;
+        A.onload = function() {
+                hasWebP = !!(A.height > 0 && A.width > 0)
+            },
+            A.onerror = function() { hasWebP = !1 },
+            A.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA"
+    }();
+    </script>
+    <style>
+        body{font-family: 'Roboto', sans-serif;}
+    .show {display: block;} .hide {display: none;}
+    .container-fluid{width: 100%;margin-right: auto;margin-left: auto;background-color: #eeeff4;}
+    .container {width: 100%;margin-left: auto;margin-right: auto;}
+    @media (min-width: 576px) {.container {max-width: 540px;}}
+    @media (min-width: 768px) {.container {max-width: 760px;}}
+    @media (min-width: 992px) {.container {max-width: 984px;}}
+    @media (min-width: 1200px) {.container {max-width: 1190px;}}
+    .grid-cont{display: grid;grid-template-columns: repeat(12, 1fr);grid-column-gap: 5px;padding: 10px 0px;grid-template-areas: "c c c c c c c c c r r r";}
+    @media (max-width: 767px){.grid-cont{grid-column-gap: 0px;
+      grid-template-areas: "c c c c c c c c c c c c" "r r r r r r r r r r r r";}}
+    .center{grid-area: c;}.right{grid-area: r;}
+    @media (max-width: 575px){.center{}}
+    /* APPS Card */
+    .main-bar{display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); grid-gap: 10px;}
+    @media (max-width: 767px) {.main-bar{grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));grid-column-gap: 5px;}}
+    .home-block{padding: 5px; background-image: url("#");background-repeat: no-repeat;background-color: #f1f1f1; border-radius: 10px;border-left: 1px solid #e6e6e6; border-top:1px solid #e6e6e6; border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;background-repeat: repeat;}
+    .home-block-title{margin: 0;}
+    .home-block-heading{display: flex;background-color: #fff;transition: 0.3s;align-items: center;box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);padding: 10px;
+        border-radius: 5px;margin: 0 0 5px 0;}
+    .card{display: grid;grid-template-columns: 1fr; background-color: #fff;transition: 0.3s;align-items: center;box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);padding: 10px;
+        border-radius: 5px;}
+    @media (max-width: 767px){.card{}}
+    .card-img{justify-self:center;}
+    @media (max-width: 767px){.card-btn{display: none;}}
+    .card-title{margin: 0px 0px 5px 0px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 14px;display: flex;font-weight: 400;}
+    .card-title > a {text-decoration: none;color: #069;}.card-title > a:hover {text-decoration: underline;}
+    .card-title:afte{content: '';width: 50px;height: 25px;position: absolute;display: inline-block;
+    background: linear-gradient(to right,rgba(255,255,255,0)0%,rgba(255,255,255,1)57%);margin-left: 150px;}
+    .card-develop{margin: 2px 0px 4px 0px;color: green;font-size: 10px;
+        white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+    .card-desc{margin: 0px 0px 5px 0px;white-space: normal;overflow: hidden;text-overflow: ellipsis;line-height: 1.5em;height: 6em;font-size: 12px;font-weight: 300;color: #333;text-align: justify;}
+    .star-size{display: flex;font-size: 11px;font-weight: 600;}
+    @media (max-width: 576px){.star-size{font-size: 0.62rem;font-weight: 800;}}
+    .show-more{text-align: right;margin:5px 15px 5px auto;}
+    .show-more > a {text-decoration: none;font-size: 14px; font-weight: 500;color: green;}
+    /*.star-size > p:nth-child(1){margin-right: auto;}*/
+    .rating{margin: 0px auto 0px 0px;}
+    .size{margin: 0px 0px 0px auto;}
+    @media (max-width: 1200px){}
+    @media (max-width:992px){.card-title{font-size: 13px;}.card-develop{font-size: 9px;}.card-desc{font-size: 12px;}}
+    .sidebar-art{display: grid;grid-gap: 8px;}
+    .home-block-art{display: grid;grid-template-columns: repeat(3, 1fr);padding: 5px;
+    background-image: url(#);background-repeat: no-repeat;background-color: #f2f2f2;
+    border-radius: 10px;grid-gap: 10px;border-left: 1px solid #e6e6e6; border-top:1px solid #e6e6e6; border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;}
+    @media (max-width: 768px){.home-block-art{grid-template-columns: 1fr;}}
+    .art-card{display: grid;grid-template-rows: auto auto auto; background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);transition: 0.3s; padding: 5px; grid-gap: 5px;border-radius: 5px;}
+    .art-img{width: 100%;height: auto;}
+    .art-title{white-space: normal;overflow: hidden;text-overflow: ellipsis;line-height: 1.3rem;height: 1.2rem;font-size: 14px;font-weight: 500;margin: 0px 0px 5px 0px;}
+    .art-title > a{text-decoration: none;color: #069;font-weight: 400;}
+    .art-title > a:hover{text-decoration: underline;}
+    .art-desc{white-space: normal;overflow: hidden;text-overflow: ellipsis;line-height: 1.3rem;height: 2.4rem;font-size: 13px;font-weight: 300;margin: 0px 0px 5px 0px;color: #333;}
+    /*.read-more{float: right;margin-top: -5px}*/
+    .read-more::after {content: "Read more...";font-size: 13px;font-weight: 400;color: green;margin: 0;}
+    .search-box{display: grid;grid-template-rows: auto auto auto; background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);transition: 0.3s; padding: 5px;border-radius: 5px;}
+    .search-box > form {justify-self: center;margin: 10px 0px;display: flex;}
+
+    @media (max-width: 767px){.search-box{margin-top: 5px;} .desktop{display: none;}}
+    @media (min-width: 768px){.phone{display: none;}}
+    .star-ratings-card {background: url("https://storage.googleapis.com/appsapkmarket/logo/star-rating.png") repeat-x;font-size: 0;height: 10px;
+    line-height: 0;overflow: hidden;text-indent: -999em;width: 55px;background-size: 11px;}
+    .star-ratings-sprite-card {background: url("https://storage.googleapis.com/appsapkmarket/logo/star-rating.png") repeat-x; background-position: 0 100%;float: left; height: 10px;display:block;background-size: 11px;}
+    @media (max-width: 768px){.star-ratings-card{width: 2.86rem; background-size: 9.8px;} .star-ratings-sprite-card{background-size: 9.8px;height: 9.3px;}}
+</style>
+    <style>
+        body {margin: 0;}
+            .header-fx-top{overflow: hidden; top: 0;width: 100%;z-index: 1;}
+    @media (min-width: 576px) {.header-fx-top{overflow: unset;}}
+
+    .navbar {padding: 12px 0px;background: #fff;border-bottom: 1px solid rgba(0,0,0,.0975);z-index:999;}
+
+    .navbar-inner{display:flex;margin-left: auto;margin-right: auto;align-items:center;}
+    @media (min-width: 992px) {.navbar-inner {max-width: 984px;}}
+    @media (min-width: 1200px) {.navbar-inner {max-width: 1190px;}}
+
+    .navbar-icon{display: inline-block;vertical-align: middle;background: url(https://storage.googleapis.com/appsapkmarket/other/appsapkmarket-similar-alternative.webp) no-repeat;background-size: 97px;border: none;width: 16px;height: 16px;}}
+    .facebook-icon{background-position: 0px 0px;}
+    .twitter-icon{background-position: -39px 0px;}
+    .pinterest-icon{background-position: -20px 0px;}
+    .instagram-icon{background-position: -20px 0px;}
+    .youtube-icon{background-position: -56px 0px;}
+
+    .w {color: #9b9b9b;right: 0;}
+
+    .x {display: none;}
+    .x-bottom{display: block;}
+    @media (min-width: 768px) {.x {display: inline-block;vertical-align: top;}} 
+    .y {display: inline-block;margin: 0 3px;width: 29px;opacity: .65;background: 0 0;cursor: pointer;
+    text-decoration: none;word-wrap: break-word;}
+    .y:focus, .y:hover {opacity: .95;}
+
+    .y-sidebar {display: inline-block;margin: 0 3px;width: 20px;opacity: .65;background: 0 0;cursor: pointer;
+    text-decoration: none;word-wrap: break-word;}
+    .y-sidebar:focus, .y-sidebar:hover {opacity: .95;}
+    .z {width: 100%;height: 15px;background-repeat: no-repeat;background-size: contain;background-position: center;display: inline-block;vertical-align: middle;}
+
+    
+    .iy {background-image: url(https://storage.googleapis.com/appsapkmarket/other/facebook-icon.svg);}
+    .iz {background-image: url(https://storage.googleapis.com/appsapkmarket/other/twitter-icon.svg);}
+    .iA {background-image: url(https://storage.googleapis.com/appsapkmarket/other/pinterest-icon.svg);}
+    .iB {background-image: url(https://storage.googleapis.com/appsapkmarket/other/instagram-icon.svg);}
+    .iC {background-image: url(https://storage.googleapis.com/appsapkmarket/other/youtube-icon.svg);}
+    
+
+    .sidebarnav-btn {margin: 0;min-height: 25px;}
+    .sidebarnav-btn-block {width: 100%;}
+    .sidebarnav-btn {display: inline-block;font-weight: 600;white-space: nowrap;vertical-align: middle;border: 1px solid transparent;padding: .075rem .75rem;font-size: 14px;line-height: 1.5;min-height: 35px;border-radius: 2px;background-color: #fff;text-align: initial;}
+    .product-title-link {text-decoration: none;color: #404040;}
+    
+    .navbar-sidebar {list-style: none; margin-left: auto;}
+    .navbar-sidebar ul {display: flex; flex-direction: column;padding: 0;}
+    .navbar-sidebar li {display: inline-block;padding: 5px 0px;}
+    .navbar-sidebar div {}
+
+
+    .header-fx-bottom{position: fixed; overflow: hidden; bottom: 0; width: 100%;z-index: 1;justify-content: space-around;border-top: 1px solid #e6e6e6;padding: 0;}
+    @media (min-width: 768px) {.header-fx-bottom{display: none;}}
+
+
+    @media (min-width: 992px){.lg-hide {display: none;}}
+    @media (max-width: 768px){.headerbar{padding: 0px 15px;}}
+    .navbar-trigger{font-size: 30px;margin: 10px;}
+    @media (max-width: 320px){.navbar-trigger{font-size: 20px;}}
+    .logo{margin-right: auto;margin-bottom: auto;margin-top: auto;}
+    @media (max-width:992px) {.logo{margin-left:15px;}}
+    /*@media (max-width:1024px){.logo{margin:auto;}}
+    @media (max-width: 992px){.logo{margin-right: auto;}}*/
+    .amp-navbar{line-height: 3.5rem;}
+
+
+    .icon {display: inline-block;vertical-align: middle;background: url(https://storage.googleapis.com/bikeshala.com/common/bikeshala-footer-icon.png) no-repeat;background-size: 165px; border: none;width: 21px;height: 21px;}
+    .home-icon {background-position: 0px 0px;}
+    .search-icon {background-position: -35px 0px;}
+    .category-icon {background-position: -72px -4px;}
+    .search-icon {background-position: -37px -2px;}
+    .cart-icon {background-position: -105px 0px;}
+    .profile-icon {background-position: -135px 0px;}
+
+    .sidebar {width: 50%;background: #fff;}
+    @media (min-width: 768px) {.sidebar{width:20%;}}
+    .sidebar-btn {margin-right: 15px;border-left: 1px solid #e6e6e6;padding-left: 20px;}
+    @media (min-width: 768px) {.sidebar-btn{}}
+
+
+    .amp-navbar-list{display: flex;list-style-type:none;justify-content: center;margin: 0;padding: 0;}
+    @media (max-width:767.98px) {.amp-navbar-list{display: none;}}
+
+    .amp-navbar-item{padding: 0 0.8rem; font-size: 0.85rem; display: flex; align-items: center;}
+    .amp-navbar-item {text-decoration: none;font-weight: 400;color: #000000;}
+    .amp-navbar-item > a {text-decoration:none;color: #000000;padding: 5px;}
+    @media (max-width: 992px){.headerbar{padding: 0;} .amp-navbar{} .amp-navbar-item{padding: 0 0.8rem;font-size: 14px;display: flex; align-items: center;}}
+    @media (max-width:1200px){.amp-navbar-item {padding: 0 0.8rem;font-size: 0.75rem;display: flex; align-items: center;}}
+    @media (max-width: 992px){.amp-navbar{display: none;}}
+    .dropdown {position: relative;display: inline-block;margin: auto 0;}
+
+    .navbar-item-text{font-weight: 600;color: #6e6e6e;font-size: 14px;}
+
+    .dropdown-content {display:none;position:absolute;padding:0;right:0;margin-left:-50px;z-index: 1;
+    background-color: #f8f8f8; color: #666; border: 0; border-radius: 0; min-width: 206px;
+    -webkit-box-shadow: 0 0 3px 2px #ccc; box-shadow: 0 0 3px 2px #ccc; padding: 0 0 12px 0; margin-top: 2px;}
+
+    .dropdown:hover .dropdown-content {display: block;line-height: 1.4;}
+    .dropdown-content li+li {margin-top: 13px;}
+
+    .dropdown-content > li {list-style-type: none;}
+    .dropdown-content a {color: black;padding: 8px 10px;text-decoration: none;display: block;}
+    .dropdown-content >li > a:hover {background-color: #ddd;}
+    .dropdown-content .divider {border-bottom: 1px solid #e1e1e1;}
+
+    .dropdown span {display: inline-block;  vertical-align: middle;}
+
+
+    .dropdown-content .profile_container {word-break: break-all; font-family: 'Open Sans'; font-style: normal;
+        font-weight: 400;margin-top: 13px;}
+
+    .dropdown-content .profile_container .profile_name {padding-left: 10px;padding-right: 5px;
+        max-height: 100px;
+        overflow-y: auto;
+        margin-bottom: 5px;
+    }
+
+    .dropdown-content .profile_container .profile_email {
+        padding-left: 10px;
+        padding-right: 5px;
+        font-size: 12px;
+        color: #888;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+    }
+
+
+    .dropdown-content-profile {display: none;position: absolute;background-color: #ffffff;min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 1;margin-left: -175px;}
+    .dropdown-content-profile span {color: black;padding: 8px 10px;text-decoration: none;display: block;}
+    .dropdown-content-profile a {color: black;padding: 0px 10px;text-decoration: none;display: block;}
+    /* .dropdown-content-profile a {color: black;padding: 8px 10px;text-decoration: none;display: block;} */
+    .dropdown-content-profile a:hover {background-color: #ddd;}
+    .dropdown:hover .dropdown-content-profile {display: block;}
+    .fa-user-icon{font-size:25px;vertical-align: middle;}
+    .nav-user-info {width: 180px; text-align: center; position: relative; line-height: 25px;padding: 21px 18px 16px;}
+    .nav-user-info a {padding: 0;display: initial;}
+    .nav-user-info a.logout {position: absolute;top: 18px;right: 18px;font-size: 13px; color: #9a9a9a; cursor: pointer; z-index: 5; height: 21px; line-height: 21px; font-weight: normal; }
+    .nav-user-name {margin-top: 7px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+    
+
+
+    .amp-sidebar-list{list-style-type:none;padding: 10px;}
+    .amp-sidebar-item{padding: 10px 0px;}
+    .amp-sidebar-item > a {text-decoration: none;font-weight: 400;color: #000000;}
+        .footer{display: grid; background-color: #fff;box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);justify-content: center;}
+.footer-main{display: grid;grid-template-columns: 1fr 1fr 1fr 1fr; justify-content: space-evenly;padding: 10px;}
+@media (max-width: 992px){.footer-main{padding:10px;}}
+@media (max-width: 992px){.footer-main{grid-template-columns: 1fr;}}
+.mains {border-bottom: 0.09rem solid #d3d3d3;}
+.mains > p{display: grid; justify-content: center; font-weight: 600;color: #404040;}
+.mains > div > a { text-decoration: none;border-bottom: 0.09rem solid #d3d3d3;margin-bottom: 10px;}
+.mains > div > a > span {font-size: 15px; color: rgba(14,14,14,.67);font-weight: 300; font-size: 13px;}
+.mains > div > a > span:hover {color: #404040;}
+.footer-item{text-decoration: none;color: #404040;font-size: 12px;font-weight: 900;margin: auto;}
+.link-list{display: flex;flex-direction: column;padding-left: 10px;}
+        .search-box{display: grid;grid-template-rows: auto auto auto; background-color: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);transition: 0.3s; padding: 5px;border-radius: 5px; margin-bottom: 5px;}
+    .search-box > form {justify-self: center;margin: 10px 0px;display: flex;}
+
+    @media (max-width: 767px){.search-box{margin-top: 5px;margin-bottom: 15px;} .desktop{display: none;}}
+    @media (min-width: 768px){.phone{display: none;}}
+          /* Social Sharing Bar */
+  .share-bar {/*position: fixed; bottom: 0;*/ height: 50px; border: none; background: #ffffff; z-index: 4999991;
+    width: 100%;}
+  .share-bar-list { padding: 0; margin: -15px; list-style: none;}
+  .share-bar .share-bar-item { display: inline-block; width: 20%; height: 50px; line-height: 50px;}
+  .share-bar-item { float: left; display: block; text-decoration: none; text-align: center; color: #ffffff; overflow: hidden;}
+  .share-bar-i  > li > a > i{display: inline-block;vertical-align: middle;width: 45px;height: 45px;
+    background: url(https://storage.googleapis.com/appsapkmarket/social/icons-social.png) no-repeat;background-size: 247px; /*margin-right: 5px;*/ }
+  .share-icon .instagram {background-position: 0 0;background-color: white;}
+  .share-icon .facebook {background-position: -50px 0;background-color: white;}
+  .share-icon .twitter {background-position: -100px 0;background-color: white;}
+  .share-icon .youtube {background-position: -150px 0;background-color: white;}
+  .share-icon .pintrest {background-position: -200px 0;background-color: white;}
+        .navbar-sidebar {height: 100%;width: 0;position: fixed;z-index: 1;top: 0;right: 0;background-color: #fff;overflow-x: hidden;transition: 0.5s;padding-top: 60px;z-index: 99999999;}
+
+        .dullBackground{position: fixed!important;top: 0!important;left: 0!important;width: 100vw!important;height: 100vh!important;background-image: none!important;background-color: rgba(0,0,0,0.5);z-index: 9999999;}
+
+        .closebtn {position: absolute;top: 0;right: 30px;font-size: 36px;margin-left: 50px;text-decoration: none;}
+        .languageModel{position: fixed;top: 0;right: 0;bottom: 0;left: 0;transition: opacity .15s linear;display: flex;justify-content: center;align-items: center;height: 100%;    background: rgba(0, 0, 0, 0.4);}
+        .model-content{position: relative;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;width: 100%;pointer-events: auto;background-color: #fff;background-clip: padding-box;border: 1px solid rgba(0,0,0,.2);border-radius: .3rem;outline: 0;width: 315px;padding: 30px;}
+        .languageSelect{display: block;width: 100%;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box;border: 1px solid #ced4da;border-radius: .25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;text-align: center;margin-bottom: 15px;}
+        .btn-info {color: #fff;background-color: #17a2b8;border-color: #17a2b8;}
+        .btn {display: inline-block;font-weight: 400;text-align: center;white-space: nowrap;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;border: 1px solid transparent;padding: .375rem .75rem;font-size: 1rem;line-height: 1.5;border-radius: .25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
+        .btn-sm{padding: .25rem .5rem;font-size: .875rem;line-height: 1.5;border-radius: .2rem;}
+        .lanclosebtn{margin-bottom: 15px;width: 35px;margin-left: auto;color: white;font-weight: 600;background: indianred;}
+        .img-fluid{max-width: 100%;height: auto;}
+    </style>
+  
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <div class="logo">
+                    <a href="/" style="display: flex;align-items: center;">
+                        <img alt="Appmarket by Appsthink" src="https://appsthink.com/loggo.png" width="180px" height="30px">
+                    </a>
+                </div>
+                <div class="space-btw"></div>
+                <a class="sidebar-btn" href="/search/" role="button" tabindex="0" aria-label="search button"><i class="icon search-icon"></i></a>
+                <span class="sidebar-btn" role="button" tabindex="0" onclick="openNav()" aria-label="sidebar toggle button"><i class="icon category-icon"></i></span>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="grid-cont">
+                <div class="center">
+                    <div class="home-block">
+                        <span class="home-block-heading">
+                            <h2 class="home-block-title">Download Apps</h2>
+                            <!-- <p class="show-more">
+                                <a href="/android-apps/">show more>></a>
+                            </p> -->
+                        </span>
+                        <div class="main-bar">
+                            <div class="card">
+                                <a class="card-img" href="./install?q=caresecure">
+                                    <img width="75px" height="75px" data-src="https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Vector-icon.png" src="https://www.appsapkmarket.com/static/1.gif" class="lzl">
+                                </a>
+                                <p class="card-develop">Care Security Services</p>
+                                <h3 class="card-title"><a href="./install?q=caresecure">Care: ERP Security</a></h3>
+                                <p class="card-desc">Fast Security for your ERP 🚀</p>
+                                <span class="star-size">
+                                    <div class="star-ratings-card">
+                                        <span style="width:86%;" class="star-ratings-sprite-card">
+                                        </span>
+                                    </div>
+                                    <p class="size">32 MB</p>
+                                </span>
+                            </div>
+                 
+                            <div class="card">
+                                <a class="card-img" href="./install?q=caresecure">
+                                    <img width="75px" height="75px" data-src="https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Vector-icon.png" src="https://www.appsapkmarket.com/static/1.gif" class="lzl">
+                                </a>
+                                <p class="card-develop">Care Security Services</p>
+                                <h3 class="card-title"><a href="./install?q=caresecure">Care: ERP Security</a></h3>
+                                <p class="card-desc">Fast Security for your ERP 🚀</p>
+                                <span class="star-size">
+                                    <div class="star-ratings-card">
+                                        <span style="width:86%;" class="star-ratings-sprite-card">
+                                        </span>
+                                    </div>
+                                    <p class="size">32 MB</p>
+                                </span>
+                            </div>
+
+                            <div class="card">
+                                <a class="card-img" href="./install?q=caresecure">
+                                    <img width="75px" height="75px" data-src="https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Vector-icon.png" src="https://www.appsapkmarket.com/static/1.gif" class="lzl">
+                                </a>
+                                <p class="card-develop">Care Security Services</p>
+                                <h3 class="card-title"><a href="./install?q=caresecure">Care: ERP Security</a></h3>
+                                <p class="card-desc">Fast Security for your ERP 🚀</p>
+                                <span class="star-size">
+                                    <div class="star-ratings-card">
+                                        <span style="width:86%;" class="star-ratings-sprite-card">
+                                        </span>
+                                    </div>
+                                    <p class="size">32 MB</p>
+                                </span>
+                            </div>
+
+                            <div class="card">
+                                <a class="card-img" href="./install?q=caresecure">
+                                    <img width="75px" height="75px" data-src="https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Vector-icon.png" src="https://www.appsapkmarket.com/static/1.gif" class="lzl">
+                                </a>
+                                <p class="card-develop">Care Security Services</p>
+                                <h3 class="card-title"><a href="./install?q=caresecure">Care: ERP Security</a></h3>
+                                <p class="card-desc">Fast Security for your ERP 🚀</p>
+                                <span class="star-size">
+                                    <div class="star-ratings-card">
+                                        <span style="width:86%;" class="star-ratings-sprite-card">
+                                        </span>
+                                    </div>
+                                    <p class="size">32 MB</p>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                   
+                    <div class="home-block-art">
+                        <div class="art-card">
+                            <div style="border-bottom: 1px solid #e6e6e6;">
+                                <a href="#" aria-label="6 Best Period &amp; Pregnancy Tracker Android Apps for women"><img src="https://www.ximplesolution.com/wp-content/uploads/2020/10/Benefits-of-ERP-1024x683.jpg" alt=" thumbnail" class="lzl art-img"></a>
+                            </div>
+                            <div>
+                                <h3 class="art-title"><a href="#">ERP is the Path to digital transformation</a></h3>
+                                <p class="art-desc">ERP gives you ability to control your process lifecycle.</p>
+                            </div>
+                        </div>
+                        <div class="art-card">
+                            <div style="border-bottom: 1px solid #e6e6e6;">
+                                <a href="#"><img src="https://www.tutorialspoint.com/sap/images/planning_and_execution.jpg" alt=" thumbnail" class="lzl art-img"></a>
+                            </div>
+                            <div>
+                                <h3 class="art-title"><a href="#">ERP helps in Business Intelligence</a></h3>
+                                <p class="art-desc">Get data analysis and your businesses at your dashboard with Billion ERP.</p>
+                            </div>
+                        </div>
+                        <div class="art-card">
+                            <div style="border-bottom: 1px solid #e6e6e6;">
+                                <a href="#" ><img src="https://i.pinimg.com/564x/68/25/8c/68258c64979cf0e85f228f19cc39886a.jpg" alt=" thumbnail" class="lzl art-img"></a>
+                            </div>
+                            <div>
+                                <h3 class="art-title"><a href="#">ERP for Exponential growth</a></h3>
+                                <p class="art-desc">Get onboard to Hyper-Customised Growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="sidebar-art">
+                        
+                        <div class="art-card" style="margin-top: 2%;">
+                            <div style="border-bottom: 1px solid #e6e6e6;">
+                                <a href="#"><img  src="https://www.batchmaster.co.in/wp-content/uploads/2021/03/7-Reasons-why-Web-based-ERP-is-ideal-for-growing-businesses-1024x696.jpg" alt=" thumbnail" class="lzl art-img"></a>
+                            </div>
+                            <div>
+                                <h3 class="art-title"><a href="#">ERP on Cloud</a></h3>
+                                <p class="art-desc">ERP Implemented on cloud advantages</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded',function(){
+    var observer,
+    options={rootMargin:"0px",threshold:.1},
+    allTheLazyImages=document.querySelectorAll(".lzl");
+
+    function lazyLoader(e){
+        e.forEach(function(e){
+            e.intersectionRatio>0&&lazyLoadImage(e.target);
+        })
+    }
+
+    function lazyLoadImage(e){
+        e.classList.remove("lzl"),
+        e.dataset.lazybackground&&(e.style.backgroundImage="url(".concat(e.dataset.lazybackground,")")),
+        // e.dataset.src,
+        // "IntersectionObserver"in window&&observer.unobserve(e)
+        e.getAttribute("data-src")&&(e.src=hasWebP&&-1!=e.dataset.src.indexOf("googleapis.com")
+            ? e.dataset.src : e.dataset.src,"IntersectionObserver"in window&&observer.unobserve(e)
+        )
+    }
+
+    if("IntersectionObserver"in window) {
+        observer=new IntersectionObserver(lazyLoader,options),
+        allTheLazyImages.forEach(function(e){
+            observer.observe(e)
+        });
+    }
+    else {
+        for(var i=0;i<allTheLazyImages.length;i++) {
+            lazyLoadImage(allTheLazyImages[i]);
+        }
+    }
+});
+</script>
+            <footer class="footer">
+                <p style="margin: auto;padding: 15px;">
+                    <a class="footer-item" href="./">&copy; 2021 APPMARKET</a> | <a class="footer-item" href="#">DMCA Disclaimer</a> | <a class="footer-item" href="#">Privacy Policy</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+    <nav class="navbar-sidebar" id="mySidenav">
+        <button style="background: none;border: none; padding: 0; text-decoration: none; cursor: pointer;" href="javascript:void(0)" aria-label="Close" class="closebtn" onclick="closeNav()">&times;</button>
+        <div style="border-bottom: 1px solid #e6e6e6;"></div>
+        <ul>
+            <li style="border-bottom: 1px solid #e6e6e6;padding: 0.025rem;">
+                <p class="sidebarnav-btn sidebarnav-btn-block text-left">Appmarket</p>
+            </li>
+            <!-- <li>
+                <button style="background: none;border: none; padding: 0; text-decoration: none; cursor: pointer;" href="javascript:void(0)" aria-label="language change button" class="product-title-link">
+                    <p class="sidebarnav-btn sidebarnav-btn-block text-left" onclick="togglemodel()"># Language</p>
+                </button>
+            </li> -->
+            
+            <li>
+                <a class="product-title-link" aria-label="Social" href="https://appsthink.com/blogs/">
+                    <p class="sidebarnav-btn sidebarnav-btn-block text-left"># Blog</p>
+                </a>
+            </li>
+            <li style="border-bottom: 1px solid #e6e6e6;margin:0;padding:0;"></li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </nav>
+    <div id="changeBack" class=""></div>
+    <div class="languageModel" id="languageModel" style="display:none;">
+        <div class="model-content">
+            <button class="btn btn-primary btn-sm lanclosebtn" onclick="togglemodel()">X</button>
+            <form method="post" action="/change-language/">
+                <input type="hidden" name="csrfmiddlewaretoken" value="KfWdg7pZZTKdZpWkD3WdU3KyHpMdPlOe46ea6IWFLmoo2jA6GWBLZbkd4GRRcipj">
+                <select class="languageSelect" name="language_code">
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="hi">Hindi</option>
+                    <option value="id">Indonesian</option>
+                    <option value="it">Italian</option>
+                    <option value="fa">Persian</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="ru">Russian</option>
+                    <option value="es">Spanish</option>
+                    <option value="tr">Turkish</option>
+                    <option value="vi">Vietnamese</option>
+                </select>
+                <input type="hidden" name="page_url" value="/">
+                <button class="btn btn-primary btn-sm" style="width:100%;">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function togglemodel() {
+        let languagemodel = document.getElementById("languageModel");
+        if (languagemodel.style.display === 'none') {
+            document.getElementById("languageModel").style.display = "flex";
+            closeNav();
+        } else {
+            document.getElementById("languageModel").style.display = "none";
+        }
+    }
+    </script>
+    <script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("changeBack").className = "dullBackground";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("changeBack").className = "";
+    }
+    </script>
+  
+</body>
+
+</html>

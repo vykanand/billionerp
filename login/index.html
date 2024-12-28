@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="jquery.min.js"></script>
+
+    
+	<title>Log in</title>
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+  	<style>
+    /* override styles here */
+    .notie-container {
+    	z-index: 999999999;
+      box-shadow: none;
+    }
+  	</style>
+
+	<link rel="stylesheet" href="style.css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300'>
+
+	<!--[if lt IE 9]>
+		<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+	<div id="login">
+
+		<div style="text-align: center;">
+		<img style="width: 15vh;height: 5vh;margin: auto;padding: 10px;" src="../logo.png">
+		</div>
+		<h1 style="margin-top:10vh"><strong>Welcome.</strong> Please login.</h1>
+
+		<form action="javascript:void(0);" method="get">
+
+			<fieldset>
+<p><input name="login" type="hidden" value="true"></p>
+				<p><input name="name" type="text" placeholder="Enter your Email"></p>
+
+				<p><input name="password" type="password" placeholder="Enter Password"></p>
+
+				<p><a href="#">Forgot Password?</a></p>
+
+				<p><input id="target" type="submit"></p>
+				<p style="text-align: center;"><a href="./signup">Not a member yet?Register here.</a></p>
+			</fieldset>
+
+		</form>
+
+	
+
+	</div> 
+
+</body>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+    $( "#target" ).click(function() {
+
+    	var values = {};
+$('input').each(function(){
+    // arrText.push($(this).val());
+    if ($(this).val()) {
+values[this.name] = $(this).val();
+}
+})
+
+var str = "";
+for (var key in values) {
+    if (str != "") {
+        str += "&";
+    }
+
+
+    str += key + "=" + encodeURIComponent(values[key]);
+}
+console.log(str);
+
+$.post("api/userapi",str,function(data, status){
+	console.log(data);
+var tr = JSON.parse(data)
+    console.log(tr);
+
+    if (tr.length > 0) {
+    	localStorage.setItem('userdat', JSON.stringify(tr[0]))
+	 notie.alert({ type: 'success', text: 'Login successful.', stay: false })
+window.location.href = '../'
+    }else {
+    	notie.alert({ type: 'error', text: 'Login Failed.', stay: false })
+    }
+  });
+
+    })
+})
+</script>
+
+<script src="https://unpkg.com/notie"></script>
+
+</html>
+<!-- partial -->
+  
+

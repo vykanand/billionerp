@@ -1,0 +1,40 @@
+services:
+  php:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - myapp-net
+
+  db:
+    image: mysql:5.6  # Use the appropriate MySQL version (in your case, 5.4)
+    environment:
+      MYSQL_ROOT_PASSWORD: vikas3891  # Set the MySQL root password
+      MYSQL_DATABASE: erpz  # Create a default database (this can be overwritten by the dump)
+    volumes:
+      - ./erpzdump.sql:/docker-entrypoint-initdb.d/erpzdump.sql  # Mount the dump file into the container
+      - mysql_data:/var/lib/mysql  # Persist data across container restarts
+    networks:
+      - myapp-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: vikas3891
+      PMA_ARBITRARY: 1
+    networks:
+      - myapp-net
+
+networks:
+  myapp-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
